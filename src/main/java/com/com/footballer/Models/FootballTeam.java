@@ -6,29 +6,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-public class Footballer implements Serializable {
-
+public class FootballTeam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private Long id;
     @Column(nullable = false)
     private String Name;
-    @Column(nullable = false)
-    private String Surname;
-    @Column(nullable = false)
-    private String Email;
-    @Column(nullable = false)
-    private String PhoneNumber;
-    private Enum<FootballerPosition> FootballerPositionEnum;
-    @ManyToOne
-    @JoinColumn(name = "FootballTeam_id")
-    private FootballTeam footballTeam;
-
-
+    @Column(nullable = false, updatable = true)
+    private Date MatchDateTime;
+    @OneToMany(mappedBy = "footballTeam")
+    private List<Footballer> footballers;
 }

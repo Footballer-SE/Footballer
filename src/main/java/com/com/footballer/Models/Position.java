@@ -6,20 +6,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-public class FootballTeam implements Serializable {
+public class Position implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
-    private Long id;
-    @Column(nullable = false)
-    private String Name;
-    @OneToMany(mappedBy = "footballTeam")
-    private List<Footballer> footballers;
+    @Column(updatable = false)
+    private Long Id;
+    private Enum<FootballerPosition> FootballerPositionEnum;
+
 }

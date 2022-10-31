@@ -1,7 +1,6 @@
 package com.group13.footballer.Controllers;
 
 import com.group13.footballer.Models.FootballTeam;
-import com.group13.footballer.Models.Footballer;
 import com.group13.footballer.Services.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

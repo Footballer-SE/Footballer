@@ -1,9 +1,7 @@
 package com.group13.footballer.Controllers;
 
 import com.group13.footballer.Models.Footballer;
-import com.group13.footballer.Repositories.FootballerRepository;
 import com.group13.footballer.Services.FootballerService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

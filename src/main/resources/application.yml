@@ -2,7 +2,7 @@ spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/footballer?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
         username: postgres
-        password: root
+        password: postgresmaster
 
     jpa:
         open-in-view: false

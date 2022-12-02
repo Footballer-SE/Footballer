@@ -5,29 +5,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
-@Entity
-@Table
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Review implements Serializable {
+@Entity
+@Table
+public class TeamMate {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column
-    private Long Id;
+    private Long RequestMadeBy;
+
     @Column
-    private Double Rating;
+    private Double Response;
+
     @Column
-    private String Comments;
+    private String Request;
 
     @ManyToOne
     @JoinColumn(name = "advert_id")
     private Advert advert;
 
-    @ManyToMany(mappedBy = "advert")
-    private List<Footballer> footballerList;
-
+    @ManyToOne
+    @JoinColumn(name = "footballTeam_id")
+    private FootballTeam footballTeam;
 }

@@ -23,6 +23,15 @@ public class FootballTeam implements Serializable {
     private String Name;
     @Column(nullable = false, updatable = true)
     private Date MatchDateTime;
+
+
+
     @OneToMany(mappedBy = "footballTeam")
-    private List<Footballer> footballers;
+    private List<EmptySpots> emptySpotsList;
+
+    @OneToOne(mappedBy = "footballTeam")
+    private Footballer footballer;
+
+    @OneToMany(mappedBy = "footballTeam")
+    private List<TeamMate> teamMateList;
 }

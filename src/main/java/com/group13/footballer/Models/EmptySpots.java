@@ -21,4 +21,8 @@ public class EmptySpots implements Serializable {
     private boolean isFilled;
     @Column
     private Enum<FootballerPosition> FootballerPositionEnum;
+
+    @ManyToOne
+    @JoinColumn(name = "footballTeam_id")
+    private FootballTeam footballTeam;
 }

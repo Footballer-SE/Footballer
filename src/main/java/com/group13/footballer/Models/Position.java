@@ -19,4 +19,7 @@ public class Position implements Serializable {
     private Long Id;
     private Enum<FootballerPosition> FootballerPositionEnum;
 
+    @ManyToOne
+    @JoinColumn(name = "advert_id")
+    private Advert advert;
 }

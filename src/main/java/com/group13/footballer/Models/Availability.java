@@ -22,4 +22,8 @@ public class Availability implements Serializable {
     private Date StartDate;
     @Column(nullable = false)
     private Date EndDate;
+
+    @ManyToOne
+    @JoinColumn(name = "advert_id")
+    private Advert advert;
 }

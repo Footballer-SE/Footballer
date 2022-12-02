@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,9 +30,21 @@ public class Footballer implements Serializable {
     @Column(nullable = false)
     private String City;
 
-    @ManyToOne
-    @JoinColumn(name = "FootballTeam_id")
+    @OneToOne(mappedBy = "footballer")
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name = "footballerTeam_id")
     private FootballTeam footballTeam;
 
+    @OneToOne
+    @JoinColumn(name = "advert_id")
+    private Advert advert;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "footballer_review",
+            joinColumns = @JoinColumn(name = "review_id", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "footballer_id",
+                    referencedColumnName = "id"))
+    private List<Review> reviewList;
 }

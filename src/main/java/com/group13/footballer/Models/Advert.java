@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,5 +24,20 @@ public class Advert implements Serializable {
     private boolean isActive;
     @Column
     private Date DateTime;
+
+    @OneToMany(mappedBy = "advert")
+    private List<Review> reviewList;
+
+    @OneToMany(mappedBy = "advert")
+    private List<Availability> availabilityList;
+
+    @OneToMany(mappedBy = "advert")
+    private List<Position> positionList;
+
+    @OneToOne(mappedBy = "advert")
+    private Footballer footballer;
+
+    @OneToMany(mappedBy = "advert")
+    private List<TeamMate> teamMateList;
 
 }

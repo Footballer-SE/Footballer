@@ -41,10 +41,10 @@ public class Footballer implements Serializable {
     @JoinColumn(name = "advert_id")
     private Advert advert;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+/*    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "footballer_review",
             joinColumns = @JoinColumn(name = "review_id", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "footballer_id",
                     referencedColumnName = "id"))
-    private List<Review> reviewList;
+    private List<Review> reviewList;*/
 }

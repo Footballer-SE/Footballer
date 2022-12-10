@@ -3,6 +3,7 @@ package com.group13.footballer.Services;
 import com.group13.footballer.Exceptions.FootballerNotFound;
 import com.group13.footballer.Models.Footballer;
 import com.group13.footballer.Repositories.FootballerRepository;
+import com.group13.footballer.Repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

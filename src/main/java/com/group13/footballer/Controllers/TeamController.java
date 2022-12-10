@@ -1,7 +1,11 @@
 package com.group13.footballer.Controllers;
 
 import com.group13.footballer.Models.FootballTeam;
+import com.group13.footballer.Models.Footballer;
+import com.group13.footballer.Repositories.FootballerRepository;
+import com.group13.footballer.Repositories.TeamRepository;
 import com.group13.footballer.Services.TeamService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +16,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class TeamController {
     private final TeamService teamService;
+    @Autowired
+    FootballerRepository footballerRepository;
+    @Autowired
+    TeamRepository teamRepository;
     public TeamController(TeamService teamService){
         this.teamService = teamService;
     }
@@ -40,4 +48,15 @@ public class TeamController {
         teamService.deleteTeamById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PostMapping("/{teamId}/footballers/{footballerId}")
+    FootballTeam addFootbalerToTeam(
+            @PathVariable Long teamId,
+            @PathVariable Long footfootballerId
+    ){
+        FootballTeam footballTeam = teamRepository.findFootballTeamById(teamId).get();
+        Footballer footballer = footballerRepository.findFootballerById(footfootballerId).get();
+        footballTeam.enrolledFootballer.add(footballer);
+        return teamRepository.save(footballTeam);
+    }
+
 }

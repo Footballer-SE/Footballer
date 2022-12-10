@@ -33,7 +33,11 @@ public class Footballer implements Serializable {
     @OneToOne(mappedBy = "footballer")
     private User user;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY)
+=======
+    @OneToOne
+>>>>>>> parent of 215645b (something)
     @JoinColumn(name = "footballerTeam_id")
     private FootballTeam footballTeam;
 

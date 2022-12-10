@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,9 +37,13 @@ public class Footballer implements Serializable {
     @OneToOne(mappedBy = "footballer")
     private User user;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "enrolledFootballer")
-    private Set<FootballTeam> footballTeams = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "footballer_enrolled",
+            joinColumns = @JoinColumn(name = "Footballer_id"),
+            inverseJoinColumns = @JoinColumn(name = "FootballTeam_id")
+    )
+    public Collection<FootballTeam> footballTeams;
 
     @OneToOne
     @JoinColumn(name = "advert_id")

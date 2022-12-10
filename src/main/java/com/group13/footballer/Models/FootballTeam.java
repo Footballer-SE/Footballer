@@ -8,10 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -30,13 +27,10 @@ public class FootballTeam implements Serializable {
     @Column(columnDefinition = "text[]")
     @Type(type = "com.group13.footballer.Config.GenericArrayUserType")
     private String[] emptySpots;
-    @ManyToMany
-    @JoinTable(
-            name = "footballer_enrolled",
-            joinColumns = @JoinColumn(name = "FootballTeam_id"),
-            inverseJoinColumns = @JoinColumn(name = "Footballer_id")
-    )
-    public Set<Footballer> enrolledFootballer = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "footballTeams")
+    private Collection<Footballer> footballers;
 
 
 

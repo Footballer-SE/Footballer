@@ -2,5 +2,6 @@ FROM openjdk:11
 COPY ./ ./
 RUN mvn clean package
 EXPOSE 8080
-COPY target/footballer-0.0.1-SNAPSHOT.jar footballer.jar
+ENV JAR_FILE = target/footballer-0.0.1-SNAPSHOT.jar
+RUN mv ${JAR_FILE} footballer.jar
 ENTRYPOINT ["java","-jar","/footballer.jar"]

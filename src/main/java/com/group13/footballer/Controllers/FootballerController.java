@@ -1,9 +1,7 @@
 package com.group13.footballer.Controllers;
 
 import com.group13.footballer.Models.Footballer;
-import com.group13.footballer.Repositories.TeamRepository;
 import com.group13.footballer.Services.FootballerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +12,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class FootballerController {
     private final FootballerService footballerService;
-
-
 
     public FootballerController(FootballerService footballerService){
         this.footballerService=footballerService;
@@ -45,6 +41,5 @@ public class FootballerController {
         footballerService.deleteFootballerById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }

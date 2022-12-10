@@ -8,7 +8,10 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -27,15 +30,6 @@ public class FootballTeam implements Serializable {
     @Column(columnDefinition = "text[]")
     @Type(type = "com.group13.footballer.Config.GenericArrayUserType")
     private String[] emptySpots;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "footballTeams")
-    private Collection<Footballer> footballers;
-
-
-
-
-
     /*@OneToMany(mappedBy = "footballTeam")
     private List<TeamMate> teamMateList;*/
 }

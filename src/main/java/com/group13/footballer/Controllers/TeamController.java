@@ -40,18 +40,4 @@ public class TeamController {
         teamService.deleteTeamById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-<<<<<<< HEAD
-   /* @PostMapping("/{teamId}/footballers/{footballerId}")
-    FootballTeam addFootbalerToTeam(
-            @PathVariable Long teamId,
-            @PathVariable Long footfootballerId
-    ){
-        FootballTeam footballTeam = teamRepository.findFootballTeamById(teamId).get();
-        Footballer footballer = footballerRepository.findFootballerById(footfootballerId).get();
-        footballTeam..add(footballer);
-        return teamRepository.save(footballTeam);
-    }*/
-
-=======
->>>>>>> parent of 215645b (something)
 }

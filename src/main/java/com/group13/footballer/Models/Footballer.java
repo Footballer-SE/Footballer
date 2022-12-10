@@ -33,7 +33,7 @@ public class Footballer implements Serializable {
     @OneToOne(mappedBy = "footballer")
     private User user;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "footballerTeam_id")
     private FootballTeam footballTeam;
 

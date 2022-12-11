@@ -30,6 +30,38 @@ public class Advert implements Serializable {
     @OneToMany(mappedBy = "advert")
     private List<Review> reviewList;
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Date getDateTime() {
+        return DateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        DateTime = dateTime;
+    }
+
+    public String getAdvertPosition() {
+        return advertPosition;
+    }
+
+    public void setAdvertPosition(String advertPosition) {
+        this.advertPosition = advertPosition;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
     @OneToMany(mappedBy = "advert")
     private List<Availability> availabilityList;
 

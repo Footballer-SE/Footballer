@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:postgresql://containers-us-west-146.railway.app:5678/railway
+        url: jdbc:postgresql://containers-us-west-158.railway.app:6912/railway
         username: postgres
-        password: 7JTUsCH1VDatDq7S3Zcw
+        password: 5iPahy8tEP6XiNI4SE5G
         driver-class-name: org.postgresql.Driver
 
     jpa:

@@ -1,6 +1,5 @@
 package com.group13.footballer.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -30,8 +28,8 @@ public class FootballTeam implements Serializable {
     @Type(type = "com.group13.footballer.Config.GenericArrayUserType")
     private String[] emptySpots;
 
-/*    @ManyToMany(mappedBy = "footballTeams",fetch = FetchType.LAZY)
-    private Set<Footballer> footballers;*/
+    @OneToOne(mappedBy = "footballTeam")
+    private Footballer footballer;
 
     /*@OneToMany(mappedBy = "footballTeam")
     private List<TeamMate> teamMateList;*/

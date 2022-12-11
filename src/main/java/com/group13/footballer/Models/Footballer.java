@@ -1,6 +1,5 @@
 package com.group13.footballer.Models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -35,19 +33,13 @@ public class Footballer implements Serializable {
     @OneToOne(mappedBy = "footballer")
     private User user;
 
-/*    @OneToOne
+    @OneToOne
+    @JoinColumn(name = "footballerTeam_id")
+    private FootballTeam footballTeam;
+
+    @OneToOne
     @JoinColumn(name = "advert_id")
     private Advert advert;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "Footballer_Team_TABLE",
-            joinColumns = {
-                    @JoinColumn(name = "footballer_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "team_id", referencedColumnName = "id")
-            }
-    )
-    private Set<FootballTeam> footballTeams;*/
 
 /*    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "footballer_review",

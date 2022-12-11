@@ -10,9 +10,12 @@ import javax.validation.constraints.NotNull;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     private Long id;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String Surname;
     @Email
     @Column(nullable = false)
     private String email;
@@ -25,10 +28,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @OneToOne
-    @JoinColumn(name = "footballer_id")
-    private Footballer footballer;
-
+    @Column(nullable = false)
+    private String City;
     private String providerId;
 
     public Long getId() {
@@ -93,5 +94,20 @@ public class User {
 
     public void setProviderId(String providerId) {
         this.providerId = providerId;
+    }
+    public String getSurname() {
+        return Surname;
+    }
+
+    public void setSurname(String surname) {
+        Surname = surname;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
     }
 }

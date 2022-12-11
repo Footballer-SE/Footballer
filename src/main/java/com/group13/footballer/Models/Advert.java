@@ -24,15 +24,14 @@ public class Advert implements Serializable {
     private boolean isActive;
     @Column
     private Date DateTime;
+    @Column
+    private String advertPosition;
 
     @OneToMany(mappedBy = "advert")
     private List<Review> reviewList;
 
     @OneToMany(mappedBy = "advert")
     private List<Availability> availabilityList;
-
-    @OneToMany(mappedBy = "advert")
-    private List<Position> positionList;
 
     @OneToOne(mappedBy = "advert")
     private Footballer footballer;

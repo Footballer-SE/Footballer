@@ -22,7 +22,7 @@ public class AdvertController {
         return advertService.addAdvert(advert);
     }
 
-    @GetMapping("/AllAdverts")
+    @GetMapping("/allAdverts")
     public ResponseEntity<List<Advert>> getAllAdverts(){
         return advertService.getAllAdverts();
     }

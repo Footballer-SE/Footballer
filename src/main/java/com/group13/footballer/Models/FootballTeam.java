@@ -3,6 +3,7 @@ package com.group13.footballer.Models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,15 +24,13 @@ public class FootballTeam implements Serializable {
     private String Name;
     @Column(nullable = false, updatable = true)
     private Date MatchDateTime;
-
-
-
-    @OneToMany(mappedBy = "footballTeam")
-    private List<EmptySpots> emptySpotsList;
+    @Column(columnDefinition = "text[]")
+    @Type(type = "com.group13.footballer.Config.GenericArrayUserType")
+    private String[] emptySpots;
 
     @OneToOne(mappedBy = "footballTeam")
     private Footballer footballer;
 
-    @OneToMany(mappedBy = "footballTeam")
-    private List<TeamMate> teamMateList;
+    /*@OneToMany(mappedBy = "footballTeam")
+    private List<TeamMate> teamMateList;*/
 }

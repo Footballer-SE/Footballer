@@ -14,15 +14,13 @@ spring:
         properties:
             hibernate:
               dialect: org.hibernate.dialect.PostgreSQLDialect
-
-
     security:
       oauth2:
         client:
           registration:
             google:
-              clientId: 5014057553-8gm9um6vnli3cle5rgigcdjpdrid14m9.apps.googleusercontent.com
-              clientSecret: tWZKVLxaD_ARWsriiiUFYoIk
+              clientId: 726331421784-1g7ul6eov6qneucu03fir3i6opvm6iis.apps.googleusercontent.com
+              clientSecret: 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
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - email

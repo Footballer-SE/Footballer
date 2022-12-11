@@ -25,9 +25,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @OneToOne
-    @JoinColumn(name = "footballer_id")
-    private Footballer footballer;
+//    @OneToOne
+//    @JoinColumn(name = "footballer_id")
+//    private Footballer footballer;
 
     private String providerId;
 

@@ -22,7 +22,7 @@ public class EmptySpots implements Serializable {
     @Column
     private Enum<FootballerPosition> FootballerPositionEnum;
 
-    @ManyToOne
-    @JoinColumn(name = "footballTeam_id")
-    private FootballTeam footballTeam;
+//    @ManyToOne
+//    @JoinColumn(name = "footballTeam_id")
+//    private FootballTeam footballTeam;
 }

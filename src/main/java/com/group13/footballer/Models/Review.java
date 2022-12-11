@@ -23,11 +23,11 @@ public class Review implements Serializable {
     @Column
     private String Comments;
 
-    @ManyToOne
-    @JoinColumn(name = "advert_id")
-    private Advert advert;
-
-    @ManyToMany(mappedBy = "advert")
-    private List<Footballer> footballerList;
+//    @ManyToOne
+//    @JoinColumn(name = "advert_id")
+//    private Advert advert;
+//
+//    @ManyToMany(mappedBy = "advert")
+//    private List<Footballer> footballerList;
 
 }

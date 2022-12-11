@@ -1,19 +1,17 @@
 spring:
     datasource:
-        url: jdbc:postgresql://containers-us-west-146.railway.app:5678/railway
-        username: postgres
-        password: 7JTUsCH1VDatDq7S3Zcw
-        driver-class-name: org.postgresql.Driver
+        url: jdbc:mysql://localhost:3306/footballer
+        username: root
+        password: 12345
+        driver-class-name: com.mysql.jdbc.Driver
 
     jpa:
         open-in-view: false
         show-sql: true
+        generate-ddl: true
         hibernate:
             ddl-auto: update
-            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-        properties:
-            hibernate:
-              dialect: org.hibernate.dialect.PostgreSQLDialect
+
     security:
       oauth2:
         client:

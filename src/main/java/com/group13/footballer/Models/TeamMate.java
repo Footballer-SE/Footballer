@@ -27,11 +27,11 @@ public class TeamMate {
     @Column
     private String Request;
 
-    @ManyToOne
-    @JoinColumn(name = "advert_id")
-    private Advert advert;
-
-    @ManyToOne
-    @JoinColumn(name = "footballTeam_id")
-    private FootballTeam footballTeam;
+//    @ManyToOne
+//    @JoinColumn(name = "advert_id")
+//    private Advert advert;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "footballTeam_id")
+//    private FootballTeam footballTeam;
 }

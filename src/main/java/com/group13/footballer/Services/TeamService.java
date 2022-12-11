@@ -24,8 +24,13 @@ public class TeamService {
     public List<FootballTeam> findAllTeams(){
         return teamRepository.findAll();
     }
-    public FootballTeam updateTeam(FootballTeam footballTeam){
-        return teamRepository.save(footballTeam);
+    public FootballTeam updateTeam(Long id, FootballTeam footballTeam){
+        FootballTeam updateTeam = teamRepository.findById(id).orElseThrow(() -> new TeamNotFound("Team by" + id + "this Id could not be found."));
+
+        updateTeam.setFootballers(footballTeam.getFootballers());
+        updateTeam.setName(footballTeam.getName());
+
+        return teamRepository.save(updateTeam);
     }
     public void deleteTeamById(Long Id){
         teamRepository.deleteFootballTeamById(Id);

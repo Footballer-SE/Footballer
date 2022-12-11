@@ -27,16 +27,16 @@ public class Advert implements Serializable {
     @Column
     private String advertPosition;
 
-    @OneToMany(mappedBy = "advert")
-    private List<Review> reviewList;
-
-    @OneToMany(mappedBy = "advert")
-    private List<Availability> availabilityList;
-
-    @OneToOne(mappedBy = "advert")
-    private Footballer footballer;
-
-    @OneToMany(mappedBy = "advert")
-    private List<TeamMate> teamMateList;
+//    @OneToMany(mappedBy = "advert")
+//    private List<Review> reviewList;
+//
+//    @OneToMany(mappedBy = "advert")
+//    private List<Availability> availabilityList;
+//
+//    @OneToOne(mappedBy = "advert")
+//    private Footballer footballer;
+//
+//    @OneToMany(mappedBy = "advert")
+//    private List<TeamMate> teamMateList;
 
 }

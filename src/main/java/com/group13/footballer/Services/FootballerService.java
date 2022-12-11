@@ -24,8 +24,17 @@ public class FootballerService {
     public List<Footballer> findAllFootballers(){
         return footballerRepository.findAll();
     }
-    public Footballer updateFootballer(Footballer footballer){
-        return footballerRepository.save(footballer);
+    public Footballer updateFootballer(Long id, Footballer footballer){
+        Footballer updatedFootballer = footballerRepository.findById(id).orElseThrow(() -> new FootballerNotFound("Footballer by" + id + "this Id could not be found."));
+
+        updatedFootballer.setFootballTeam(footballer.getFootballTeam());
+        //updatedFootballer.setAdvert(footballer.getAdvert());
+        updatedFootballer.setEmail(footballer.getEmail());
+        updatedFootballer.setCity(footballer.getCity());
+        updatedFootballer.setName(footballer.getName());
+        //updatedFootballer.setUser(footballer.getUser());
+        updatedFootballer.setSurname(footballer.getSurname());
+        return footballerRepository.save(updatedFootballer);
     }
     public void deleteFootballerById(Long Id){
         footballerRepository.deleteFootballerById(Id);

@@ -23,7 +23,7 @@ public class Availability implements Serializable {
     @Column(nullable = false)
     private Date EndDate;
 
-    @ManyToOne
-    @JoinColumn(name = "advert_id")
-    private Advert advert;
+//    @ManyToOne
+//    @JoinColumn(name = "advert_id")
+//    private Advert advert;
 }

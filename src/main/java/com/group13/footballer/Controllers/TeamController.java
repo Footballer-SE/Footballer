@@ -31,8 +31,8 @@ public class TeamController {
         return new ResponseEntity<>(team,HttpStatus.OK);
     }
     @PutMapping("/updateTeam/{id}")
-    public ResponseEntity<FootballTeam> updateTeam(@RequestBody FootballTeam footballTeam){
-        FootballTeam updatedTeam = teamService.updateTeam(footballTeam);
+    public ResponseEntity<FootballTeam> updateTeam(@PathVariable Long id,@RequestBody FootballTeam footballTeam){
+        FootballTeam updatedTeam = teamService.updateTeam(id,footballTeam);
         return new ResponseEntity<>(updatedTeam,HttpStatus.OK);
     }
     @DeleteMapping("/deleteTeam/{id}")

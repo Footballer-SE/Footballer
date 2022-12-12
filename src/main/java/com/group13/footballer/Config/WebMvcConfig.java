@@ -10,7 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final long MAX_AGE_SECS = 3600;
 
-    @Value("${app.cors.allowedOrigins}")
+    @Value("${app.cors.allowedOrigins},https://footballer-production-1ce5.up.railway.app/,https://footballerfe.netlify.app/")
     private String[] allowedOrigins;
 
     @Override

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@CrossOrigin(origins = "https://footballerfe.netlify.app/ , https://footballer-production-1ce5.up.railway.app/")
+@CrossOrigin(origins = "https://footballerfe.netlify.app , https://footballer-production-1ce5.up.railway.app")
 @RequestMapping("/chat")
 public class ChatController {
 

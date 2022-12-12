@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://footballerfe.netlify.app/")
+@CrossOrigin(origins = "https://footballerfe.netlify.app/ , https://footballer-production-1ce5.up.railway.app/")
 public class FootballerController {
     private final FootballerService footballerService;
 

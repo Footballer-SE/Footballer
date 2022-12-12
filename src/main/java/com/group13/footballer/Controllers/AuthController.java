@@ -24,7 +24,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "https://footballerfe.netlify.app/")
+@CrossOrigin(origins = "https://footballerfe.netlify.app/ , https://footballer-production-1ce5.up.railway.app/")
 public class AuthController {
 
     @Autowired

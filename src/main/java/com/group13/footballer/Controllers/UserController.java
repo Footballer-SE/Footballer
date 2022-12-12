@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin("https://footballerfe.netlify.app/")
+@CrossOrigin(origins = "https://footballerfe.netlify.app/ , https://footballer-production-1ce5.up.railway.app/")
 public class UserController {
 
     @Autowired

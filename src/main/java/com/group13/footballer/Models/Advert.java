@@ -5,38 +5,35 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
-public class Advert implements Serializable {
+public class Advert  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private Long Id;
-    @Column
-    private boolean isActive;
-    @Column
-    private Date DateTime;
-    @Column
-    private String advertPosition;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
+    private Long advertId;
+  
+    private Date dateTime;
 
-    @OneToMany(mappedBy = "advert")
-    private List<Review> reviewList;
+    private String description;
+ 
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn
+    private City city;
 
-    @OneToMany(mappedBy = "advert")
-    private List<Availability> availabilityList;
+    @ManyToMany
+    @JoinTable(
+    joinColumns = @JoinColumn,
+    inverseJoinColumns = @JoinColumn
+    )
+    private List<Position> positions;
 
-    @OneToOne(mappedBy = "advert")
-    private Footballer footballer;
-
-    @OneToMany(mappedBy = "advert")
-    private List<TeamMate> teamMateList;
 
 }

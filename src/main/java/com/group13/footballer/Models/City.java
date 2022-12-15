@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 @Data
@@ -26,6 +27,6 @@ public class City {
 
     private String cityName;
 
-    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "city")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "city")
     private List<Advert> adverts;
 }

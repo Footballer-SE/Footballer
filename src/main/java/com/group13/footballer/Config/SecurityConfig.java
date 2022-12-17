@@ -108,11 +108,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",
-                            "/swagger-ui/index.html",
-                            "/swagger-ui/**")
+                            "/v3/api-docs/**",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html")
                         .permitAll()
-                    .antMatchers("/auth/**", "/oauth2/**","/allFootballers/**","/v3/api-docs/","/swagger-ui/**","/v2/api-docs", "/swagger-resources/**",
-                            "/swagger-ui.html", "/webjars/**")
+                    .antMatchers("/auth/**", "/oauth2/**","/allFootballers/**","/v3/api-docs/**",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html","/webjars/**")
                         .permitAll()
                     .anyRequest()
                         .authenticated()

@@ -27,6 +27,6 @@ public class City {
 
     private String cityName;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "city")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "city")
     private List<Advert> adverts;
 }

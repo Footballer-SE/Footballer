@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface TeamRepository extends JpaRepository<FootballTeam,Long> {
-
+    Optional<FootballTeam> findTeamByUser_UserId(Long userId);
 }

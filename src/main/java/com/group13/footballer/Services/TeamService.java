@@ -2,6 +2,8 @@ package com.group13.footballer.Services;
 
 import com.group13.footballer.Exceptions.TeamNotFound;
 import com.group13.footballer.Models.FootballTeam;
+import com.group13.footballer.Models.User;
+import com.group13.footballer.Payload.CreateFootballTeamRequest;
 import com.group13.footballer.Repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,29 @@ import java.util.List;
 @Service
 @Transactional
 public class TeamService {
-    public final TeamRepository teamRepository;
+    private final TeamRepository teamRepository;
 
-    @Autowired
-    public TeamService(TeamRepository teamRepository){
+    private final UserService userService;
+
+    public TeamService(TeamRepository teamRepository,UserService userService){
         this.teamRepository = teamRepository;
+        this.userService = userService;
     }
-    public FootballTeam addTeam(FootballTeam footballTeam){
+    public FootballTeam addTeam(CreateFootballTeamRequest createFootballTeamRequest){
+        User user = userService.findById(createFootballTeamRequest.getUserId());
+
+        if(teamRepository.findTeamByUser_UserId(createFootballTeamRequest.getUserId()).isPresent()){
+            throw new TeamAlreadyExist
+        }
+
+        FootballTeam footballTeam = new FootballTeam
+        (
+            createFootballTeamRequest.getFootballTeamName(),
+            createFootballTeamRequest.getFootballTeamCapacity(),
+            createFootballTeamRequest.getFootballTeamCurrentCount(),
+            user
+        );
+
         return teamRepository.save(footballTeam);
     }
     public List<FootballTeam> findAllTeams(){

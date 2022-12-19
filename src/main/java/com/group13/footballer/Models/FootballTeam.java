@@ -14,7 +14,6 @@ public class FootballTeam {
    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long footballTeamId;
  
     private String footballTeamName;
@@ -22,5 +21,16 @@ public class FootballTeam {
     private int footballTeamCapacity;
 
     private int footballTeamCurrentCount;
+
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
+
+    public FootballTeam(String footballTeamName,int footballTeamCapacity,int footballTeamCurrentCount,User user){
+        this.footballTeamName = footballTeamName;
+        this.footballTeamCapacity = footballTeamCapacity;
+        this.footballTeamCurrentCount = footballTeamCurrentCount;
+        this.user = user;
+    }
 
 }

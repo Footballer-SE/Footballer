@@ -25,7 +25,7 @@ public class User {
     private String imageUrl;
     
     private Boolean emailVerified = false;
-    @JsonIgnore
+
     private String password;
   
     @Enumerated(EnumType.STRING)
@@ -34,6 +34,9 @@ public class User {
     private String providerId;
 
     private String telephoneNumber;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
+    private FootballTeam footballTeam;
 
     
 

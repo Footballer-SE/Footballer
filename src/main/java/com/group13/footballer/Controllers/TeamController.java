@@ -1,6 +1,7 @@
 package com.group13.footballer.Controllers;
 
 import com.group13.footballer.Models.FootballTeam;
+import com.group13.footballer.Payload.CreateFootballTeamRequest;
 import com.group13.footballer.Services.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class TeamController {
         return new ResponseEntity<>(teams, HttpStatus.OK);
     }
     @PostMapping("/addTeam")
-    public ResponseEntity<FootballTeam> addTeam(@RequestBody FootballTeam footballTeam){
-        FootballTeam newTeam = teamService.addTeam(footballTeam);
+    public ResponseEntity<FootballTeam> addTeam(@RequestBody CreateFootballTeamRequest createFootballTeamRequest){
+        FootballTeam newTeam = teamService.addTeam(createFootballTeamRequest);
         return new ResponseEntity<>(newTeam,HttpStatus.CREATED);
     }
     @GetMapping("/team/{id}")

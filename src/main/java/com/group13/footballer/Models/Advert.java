@@ -17,14 +17,15 @@ public class Advert  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   
     private Long advertId;
   
     private Date dateTime;
 
     private String description;
+
+    private Boolean isActive;
  
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn
     private City city;
 

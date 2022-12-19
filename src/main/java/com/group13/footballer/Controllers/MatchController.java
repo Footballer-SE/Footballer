@@ -1,6 +1,6 @@
 package com.group13.footballer.Controllers;
 
-import com.group13.footballer.Models.Matchx;
+import com.group13.footballer.Models.Match;
 import com.group13.footballer.Services.MatchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,22 +18,22 @@ public class MatchController {
     }
 
     @PostMapping("/addMatch")
-    public ResponseEntity<Matchx> addMatch(@RequestBody Matchx matchx){
-        return matchService.addMatch(matchx);
+    public ResponseEntity<Match> addMatch(@RequestBody Match match){
+        return matchService.addMatch(match);
     }
 
     @GetMapping("/allMatches")
-    public ResponseEntity<List<Matchx>> getAllMatches() {
+    public ResponseEntity<List<Match>> getAllMatches() {
         return matchService.getAllMatches();
     }
     @GetMapping("/getMatch/{id}")
-    public ResponseEntity<Matchx> getMatchById(@PathVariable Long id) {
+    public ResponseEntity<Match> getMatchById(@PathVariable Long id) {
         return matchService.getMatchById(id);
     }
 
     @PutMapping("/updateMatch/{id}")
-    public ResponseEntity<Matchx> updateMatchById(@RequestBody Matchx matchx, @PathVariable Long id) {
-        return matchService.updateMatchById(matchx,id);
+    public ResponseEntity<Match> updateMatchById(@RequestBody Match match, @PathVariable Long id) {
+        return matchService.updateMatchById(match,id);
     }
 
     @DeleteMapping("/deleteMatch/{id}")

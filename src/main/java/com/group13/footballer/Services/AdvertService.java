@@ -47,7 +47,7 @@ public class AdvertService {
             newAdvert.setDateTime(new Date());
             newAdvert.setCity(advert.getCity());
             newAdvert.setDescription(advert.getDescription());
-            newAdvert.setPositions(advert.getPositions());
+
 
             /* burda eğer eski advert silinmeden yeni advert ekleniyorsa
             * önce eski advert silinip daha sonra yeni advert eklenmeli

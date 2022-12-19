@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -35,7 +37,11 @@ public class User {
 
     private String telephoneNumber;
 
-    
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+    private List<Advert> adverts;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+    private List<FootballTeam> footballTeams;
 
    
 }

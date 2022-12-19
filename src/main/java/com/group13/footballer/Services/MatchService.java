@@ -1,7 +1,7 @@
 package com.group13.footballer.Services;
 
 import com.group13.footballer.Exceptions.MatchNotFound;
-import com.group13.footballer.Models.Matchx;
+import com.group13.footballer.Models.Match;
 import com.group13.footballer.Repositories.MatchRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,29 +21,29 @@ public class MatchService {
         this.matchRepository = matchRepository;
     }
 
-    public ResponseEntity<Matchx> addMatch(Matchx matchx) {
-        matchx = matchRepository.save(matchx);
-        return new ResponseEntity<>(matchx, HttpStatus.CREATED);
+    public ResponseEntity<Match> addMatch(Match match) {
+        match = matchRepository.save(match);
+        return new ResponseEntity<>(match, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<List<Matchx>> getAllMatches() {
-        List<Matchx> matchxes = matchRepository.findAll();
-        return new ResponseEntity<>(matchxes,HttpStatus.OK);
+    public ResponseEntity<List<Match>> getAllMatches() {
+        List<Match> matches = matchRepository.findAll();
+        return new ResponseEntity<>(matches,HttpStatus.OK);
     }
 
-    public ResponseEntity<Matchx> getMatchById(Long id) {
-        Matchx matchx = matchRepository.findById(id).orElseThrow(() -> new MatchNotFound("Match by" + id + "this Id could not be found."));
-        return new ResponseEntity<>(matchx,HttpStatus.OK);
+    public ResponseEntity<Match> getMatchById(Long id) {
+        Match match = matchRepository.findById(id).orElseThrow(() -> new MatchNotFound("Match by" + id + "this Id could not be found."));
+        return new ResponseEntity<>(match,HttpStatus.OK);
     }
 
-    public ResponseEntity<Matchx> updateMatchById(Matchx matchx, Long id) {
+    public ResponseEntity<Match> updateMatchById(Match match, Long id) {
 
         /* güncellenecek */
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity deleteMatchById(Long id) {
-        Optional<Matchx> match = matchRepository.findById(id);
+        Optional<Match> match = matchRepository.findById(id);
         if(match.isPresent()) {
             matchRepository.deleteById(id);
             return new ResponseEntity(HttpStatus.OK);

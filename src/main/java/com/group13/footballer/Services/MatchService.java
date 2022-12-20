@@ -30,13 +30,10 @@ public class MatchService {
 
 
     public CreateMatchResponse addMatch(CreateMatchRequest request) {
-
-
-//
         Match match = new Match(userService.findById(request.getUserId()), advertService.findById(request.getAdvertId()));
 
         dateControl(advertService.getAdvertById(request.getAdvertId()).getDateTime(),request.getUserId());
-        //a
+
         matchRepository.save(match);
 
         return new CreateMatchResponse
@@ -56,6 +53,7 @@ public class MatchService {
                                         match.getAdvert().getDescription(),
                                         match.getAdvert().getIsActive(),
                                         new CityResponse(match.getAdvert().getCity().getCityId(), match.getAdvert().getCity().getCityName()),
+                                        match.getAdvert().getAdvertType(),
                                         match.getAdvert()
                                                 .getPositions()
                                                 .stream()

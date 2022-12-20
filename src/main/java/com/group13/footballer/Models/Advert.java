@@ -23,15 +23,18 @@ public class Advert {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long advertId;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-ddTHH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd@HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
-//TODO advert type olustur
+
     private String description;
 
     private Boolean isActive;
+
+    @Enumerated(EnumType.STRING)
+    private AdvertType advertType;
  
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private City city;
 
@@ -45,11 +48,12 @@ public class Advert {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "advert")
     private List<Match> match;
 
-    public Advert(LocalDateTime dateTime, String description, Boolean isActive, City city, List<Position> positions) {
+    public Advert(LocalDateTime dateTime, String description, Boolean isActive, City city,AdvertType advertType, List<Position> positions) {
         this.dateTime = dateTime;
         this.description = description;
         this.isActive = isActive;
         this.city = city;
         this.positions = positions;
+        this.advertType=advertType;
     }
 }

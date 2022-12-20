@@ -1,7 +1,9 @@
 package com.group13.footballer.Services;
 
+
 import com.group13.footballer.Models.City;
 import com.group13.footballer.Models.Position;
+import com.group13.footballer.Models.converter.AdvertTypeConverter;
 import com.group13.footballer.Models.dto.*;
 import com.group13.footballer.core.Exceptions.Constant.Constant;
 import com.group13.footballer.core.Exceptions.DateIsWrongException;
@@ -9,17 +11,15 @@ import com.group13.footballer.core.Exceptions.FootballerNotFound;
 import com.group13.footballer.Models.Advert;
 import com.group13.footballer.Repositories.AdvertRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.temporal.TemporalAmount;
-import java.util.Date;
+
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +33,8 @@ public class AdvertService {
 
     private final PositionService positionService;
 
+    private final AdvertTypeConverter advertTypeConverter;
+
     public AdvertResponse addAdvert(CreateAdvertRequest request) {
         City city = cityService.findCityById(request.getCityId());
         List<Position> byPositions = positionService.findByPositions(request.getPositionIds());
@@ -44,6 +46,7 @@ public class AdvertService {
                         request.getDescription(),
                         request.getIsActive(),
                         city,
+                        advertTypeConverter.convert(request.getAdvertType()),
                         byPositions
 
                 );
@@ -55,6 +58,7 @@ public class AdvertService {
                 advert.getDescription(),
                 advert.getIsActive(),
                 new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                advert.getAdvertType(),
                 byPositions.stream().map(position -> new PositionResponse
                         (
                                 position.getPositionId(),
@@ -65,7 +69,7 @@ public class AdvertService {
     }
 
     private void controlDate(LocalDateTime dateTime) {
-        if(dateTime.isBefore(LocalDateTime.now()) && dateTime.isAfter(LocalDateTime.now().plus(Period.ofMonths(1)))){
+        if (dateTime.isBefore(LocalDateTime.now()) || dateTime.isAfter(LocalDateTime.now().plus(Period.ofMonths(1)))) {
             throw new DateIsWrongException(Constant.DATE_IS_WRONG);
         }
     }
@@ -79,6 +83,7 @@ public class AdvertService {
                         advert.getDescription(),
                         advert.getIsActive(),
                         new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        advert.getAdvertType(),
                         advert.getPositions().stream().map(position -> new PositionResponse
                                 (
                                         position.getPositionId(),
@@ -97,6 +102,7 @@ public class AdvertService {
                         advert.getDescription(),
                         advert.getIsActive(),
                         new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        advert.getAdvertType(),
                         advert
                                 .getPositions()
                                 .stream()

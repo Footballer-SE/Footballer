@@ -1,6 +1,7 @@
 package com.group13.footballer.Models.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.group13.footballer.Models.AdvertType;
 import com.group13.footballer.Models.City;
 import com.group13.footballer.Models.Match;
 import com.group13.footballer.Models.Position;
@@ -21,7 +22,7 @@ public class AdvertResponse {
 
     private Long advertId;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-ddTHH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd@HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
 
@@ -30,6 +31,8 @@ public class AdvertResponse {
     private Boolean isActive;
 
     private CityResponse city;
+
+    private AdvertType advertType;
 
     private List<PositionResponse> positions;
 

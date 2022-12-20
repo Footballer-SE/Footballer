@@ -1,4 +1,4 @@
-package com.group13.footballer.Models.dto;
+package com.group13.footballer.core.Exceptions;
 
 public class CityNotFoundException extends RuntimeException {
     public CityNotFoundException(String message) {

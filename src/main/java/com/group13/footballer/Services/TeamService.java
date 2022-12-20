@@ -1,5 +1,8 @@
 package com.group13.footballer.Services;
 
+import com.group13.footballer.Models.dto.FootballTeamResponse;
+import com.group13.footballer.Models.dto.UpdateFootballTeamRequest;
+import com.group13.footballer.Models.dto.UserResponse;
 import com.group13.footballer.core.Exceptions.Constant.Constant;
 import com.group13.footballer.core.Exceptions.TeamAlreadyExistException;
 import com.group13.footballer.core.Exceptions.TeamNotFound;
@@ -19,41 +22,56 @@ public class TeamService {
 
     private final UserService userService;
 
-    public TeamService(TeamRepository teamRepository,UserService userService){
+    public TeamService(TeamRepository teamRepository, UserService userService) {
         this.teamRepository = teamRepository;
         this.userService = userService;
     }
-    public FootballTeam addTeam(CreateFootballTeamRequest createFootballTeamRequest){
-        User user = userService.findById(createFootballTeamRequest.getUserId());
 
-        if(teamRepository.findTeamByUser_UserId(createFootballTeamRequest.getUserId()).isPresent()){
+    public void addTeam(CreateFootballTeamRequest createFootballTeamRequest) {
+        User user = userService.findById(createFootballTeamRequest.getUserId());
+//TODO matchı sıl
+        if (teamRepository.findTeamByUser_UserId(createFootballTeamRequest.getUserId()).isPresent()) {
             throw new TeamAlreadyExistException(Constant.TEAM_ALREADY_EXIST);
         }
         FootballTeam footballTeam = new FootballTeam
-        (
-            createFootballTeamRequest.getFootballTeamName(),
-            createFootballTeamRequest.getFootballTeamCapacity(),
-            createFootballTeamRequest.getFootballTeamCurrentCount(),
-            user
-        );
+                (
+                        createFootballTeamRequest.getFootballTeamName(),
+                        createFootballTeamRequest.getFootballTeamCapacity(),
+                        createFootballTeamRequest.getFootballTeamCurrentCount(),
+                        user
+                );
+        teamRepository.save(footballTeam);
 
-        return teamRepository.save(footballTeam);
     }
-    public List<FootballTeam> findAllTeams(){
-        return teamRepository.findAll();
-    }
-    public FootballTeam updateTeam(Long id, FootballTeam footballTeam){
-        FootballTeam updateTeam = teamRepository.findById(id).orElseThrow(() -> new TeamNotFound("Team by" + id + "this Id could not be found."));
 
-        updateTeam.setFootballTeamCapacity(footballTeam.getFootballTeamCapacity());
-        updateTeam.setFootballTeamCurrentCount(footballTeam.getFootballTeamCurrentCount());
-        updateTeam.setFootballTeamName(footballTeam.getFootballTeamName());
-        return teamRepository.save(updateTeam);
+    public FootballTeamResponse updateTeam(UpdateFootballTeamRequest request) {
+        FootballTeam updateTeam = findTeamById(request.getFootballTeamId());
+
+        updateTeam.setFootballTeamCapacity(request.getFootballTeamCapacity());
+        updateTeam.setFootballTeamCurrentCount(request.getFootballTeamCurrentCount());
+        updateTeam.setFootballTeamName(request.getFootballTeamName());
+        FootballTeam updatedFootballTeam = teamRepository.save(updateTeam);
+        return new FootballTeamResponse
+                (
+                        updatedFootballTeam.getFootballTeamId(),
+                        updatedFootballTeam.getFootballTeamName(),
+                        updatedFootballTeam.getFootballTeamCapacity(),
+                        updatedFootballTeam.getFootballTeamCurrentCount(),
+                        new UserResponse
+                                (
+                                        updatedFootballTeam.getUser().getUserId(),
+                                        updatedFootballTeam.getUser().getUserName(),
+                                        updatedFootballTeam.getUser().getEmail(),
+                                        updatedFootballTeam.getUser().getTelephoneNumber()
+                                )
+                );
     }
-    public void deleteTeamById(Long Id){
-        teamRepository.deleteById(Id);
+
+    public void deleteTeamById(Long id) {
+        teamRepository.deleteById(findTeamById(id).getFootballTeamId());
     }
-    public FootballTeam findTeamById(Long Id){
-        return teamRepository.findById(Id).orElseThrow(() -> new TeamNotFound("Team by" + Id + "this Id could not be found."));
+
+    public FootballTeam findTeamById(Long id) {
+        return teamRepository.findById(id).orElseThrow(() -> new TeamNotFound("Team by" + id + "this Id could not be found."));
     }
 }

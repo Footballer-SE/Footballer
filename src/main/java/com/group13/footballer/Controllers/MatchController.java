@@ -1,7 +1,10 @@
 package com.group13.footballer.Controllers;
 
-import com.group13.footballer.Models.Matchx;
+import com.group13.footballer.Models.Match;
+import com.group13.footballer.Models.dto.CreateMatchRequest;
+import com.group13.footballer.Models.dto.CreateMatchResponse;
 import com.group13.footballer.Services.MatchService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,26 +21,14 @@ public class MatchController {
     }
 
     @PostMapping("/addMatch")
-    public ResponseEntity<Matchx> addMatch(@RequestBody Matchx matchx){
-        return matchService.addMatch(matchx);
+    public ResponseEntity<CreateMatchResponse> addMatch(@RequestBody CreateMatchRequest request){
+        return new ResponseEntity<>(matchService.addMatch(request), HttpStatus.CREATED);
     }
 
-    @GetMapping("/allMatches")
-    public ResponseEntity<List<Matchx>> getAllMatches() {
-        return matchService.getAllMatches();
-    }
-    @GetMapping("/getMatch/{id}")
-    public ResponseEntity<Matchx> getMatchById(@PathVariable Long id) {
-        return matchService.getMatchById(id);
-    }
-
-    @PutMapping("/updateMatch/{id}")
-    public ResponseEntity<Matchx> updateMatchById(@RequestBody Matchx matchx, @PathVariable Long id) {
-        return matchService.updateMatchById(matchx,id);
-    }
 
     @DeleteMapping("/deleteMatch/{id}")
-    public ResponseEntity deleteMatchById(@PathVariable Long id){
-        return matchService.deleteMatchById(id);
+    public ResponseEntity<Void> deleteMatchById(@PathVariable Long id){
+        matchService.deleteMatchById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

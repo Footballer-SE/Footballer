@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +26,8 @@ public class FootballTeam {
     @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
+
+
 
     public FootballTeam(String footballTeamName,int footballTeamCapacity,int footballTeamCurrentCount,User user){
         this.footballTeamName = footballTeamName;

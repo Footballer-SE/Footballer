@@ -1,6 +1,8 @@
 package com.group13.footballer.Services;
 
-import com.group13.footballer.Exceptions.FootballerNotFound;
+import com.group13.footballer.Models.dto.CityNotFoundException;
+import com.group13.footballer.core.Exceptions.Constant.Constant;
+import com.group13.footballer.core.Exceptions.FootballerNotFound;
 import com.group13.footballer.Models.City;
 import com.group13.footballer.Repositories.CityRepository;
 
@@ -23,7 +25,9 @@ public class CityService {
     public List<City> findAllCities(){
         return cityRepository.findAll();
     }
-    public City findCityById(Long Id){
-        return cityRepository.findById(Id).orElseThrow(() -> new FootballerNotFound("City by" + Id + "this Id could not be found."));
+
+
+    protected City findCityById(Long Id){
+        return cityRepository.findById(Id).orElseThrow(() -> new CityNotFoundException(Constant.CITY_NOT_FOUND));
     }
 }

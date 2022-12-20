@@ -1,10 +1,10 @@
 package com.group13.footballer.Controllers;
 
-import com.group13.footballer.Exceptions.ResourceNotFoundException;
+import com.group13.footballer.core.Exceptions.ResourceNotFoundException;
 import com.group13.footballer.Models.User;
 import com.group13.footballer.Repositories.UserRepository;
-import com.group13.footballer.Security.CurrentUser;
-import com.group13.footballer.Security.UserPrincipal;
+import com.group13.footballer.core.security.CurrentUser;
+import com.group13.footballer.core.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

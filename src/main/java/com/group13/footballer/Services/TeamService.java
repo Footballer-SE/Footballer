@@ -1,11 +1,12 @@
 package com.group13.footballer.Services;
 
-import com.group13.footballer.Exceptions.TeamNotFound;
+import com.group13.footballer.core.Exceptions.Constant.Constant;
+import com.group13.footballer.core.Exceptions.TeamAlreadyExistException;
+import com.group13.footballer.core.Exceptions.TeamNotFound;
 import com.group13.footballer.Models.FootballTeam;
 import com.group13.footballer.Models.User;
-import com.group13.footballer.Payload.CreateFootballTeamRequest;
+import com.group13.footballer.Models.dto.CreateFootballTeamRequest;
 import com.group13.footballer.Repositories.TeamRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,9 +27,8 @@ public class TeamService {
         User user = userService.findById(createFootballTeamRequest.getUserId());
 
         if(teamRepository.findTeamByUser_UserId(createFootballTeamRequest.getUserId()).isPresent()){
-            throw new TeamAlreadyExist
+            throw new TeamAlreadyExistException(Constant.TEAM_ALREADY_EXIST);
         }
-
         FootballTeam footballTeam = new FootballTeam
         (
             createFootballTeamRequest.getFootballTeamName(),

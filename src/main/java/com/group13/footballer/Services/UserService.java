@@ -2,8 +2,8 @@ package com.group13.footballer.Services;
 
 import org.springframework.stereotype.Service;
 
-import com.group13.footballer.Constant.Constant;
-import com.group13.footballer.Exceptions.UserNotFoundException;
+import com.group13.footballer.core.Exceptions.Constant.Constant;
+import com.group13.footballer.core.Exceptions.UserNotFoundException;
 import com.group13.footballer.Models.User;
 import com.group13.footballer.Repositories.UserRepository;
 

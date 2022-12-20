@@ -2,10 +2,12 @@ package com.group13.footballer.Models;
 
 import javax.persistence.*;
 
+import com.group13.footballer.core.security.AuthProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -37,6 +39,11 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
     private FootballTeam footballTeam;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
+    private List<Match> match;
+
+
 
     
 

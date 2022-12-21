@@ -37,7 +37,7 @@ public class User {
 
     private String telephoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "user")
     private FootballTeam footballTeam;
 
    

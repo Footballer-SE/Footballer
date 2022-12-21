@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CreateMatchRequest {
 
-    private Long userId;
+    private Long id;
 
     private Long advertId;
 }

@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface MatchRepository extends JpaRepository<Match,Long> {
 
-    List<Match> findByUser_UserId(Long userId);
+    List<Match> findByUser_Id(Long id);
 }

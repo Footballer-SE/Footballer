@@ -28,9 +28,9 @@ public class TeamService {
     }
 
     public void addTeam(CreateFootballTeamRequest createFootballTeamRequest) {
-        User user = userService.findById(createFootballTeamRequest.getUserId());
+        User user = userService.findById(createFootballTeamRequest.getId());
 //TODO matchı sıl
-        if (teamRepository.findTeamByUser_UserId(createFootballTeamRequest.getUserId()).isPresent()) {
+        if (teamRepository.findTeamByUser_Id(createFootballTeamRequest.getId()).isPresent()) {
             throw new TeamAlreadyExistException(Constant.TEAM_ALREADY_EXIST);
         }
         FootballTeam footballTeam = new FootballTeam
@@ -59,8 +59,8 @@ public class TeamService {
                         updatedFootballTeam.getFootballTeamCurrentCount(),
                         new UserResponse
                                 (
-                                        updatedFootballTeam.getUser().getUserId(),
-                                        updatedFootballTeam.getUser().getUserName(),
+                                        updatedFootballTeam.getUser().getId(),
+                                        updatedFootballTeam.getUser().getName(),
                                         updatedFootballTeam.getUser().getEmail(),
                                         updatedFootballTeam.getUser().getTelephoneNumber()
                                 )

@@ -22,8 +22,8 @@ public class UserService {
 
         return new GetUserResponse
                 (
-                        user.getUserId(),
-                        user.getUserName(),
+                        user.getId(),
+                        user.getName(),
                         user.getEmail(),
                         user.getImageUrl(),
                         user.getEmailVerified(),

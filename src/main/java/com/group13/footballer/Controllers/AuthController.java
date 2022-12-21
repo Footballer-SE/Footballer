@@ -62,7 +62,7 @@ public class AuthController {
 
         // Creating user's account
         User user = new User();
-        user.setUserName(signUpRequest.getName());
+        user.setName(signUpRequest.getName());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(signUpRequest.getPassword());
         user.setProvider(AuthProvider.local);
@@ -73,7 +73,7 @@ public class AuthController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/user/me")
-                .buildAndExpand(result.getUserId()).toUri();
+                .buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully@"));

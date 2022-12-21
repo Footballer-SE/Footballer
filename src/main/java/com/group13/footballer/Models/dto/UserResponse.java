@@ -13,9 +13,9 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 public class UserResponse {
 
-    private Long userId;
+    private Long id;
 
-    private String userName;
+    private String name;
 
     private String email;
 

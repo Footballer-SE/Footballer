@@ -30,9 +30,9 @@ public class MatchService {
 
 
     public CreateMatchResponse addMatch(CreateMatchRequest request) {
-        Match match = new Match(userService.findById(request.getUserId()), advertService.findById(request.getAdvertId()));
+        Match match = new Match(userService.findById(request.getId()), advertService.findById(request.getAdvertId()));
 
-        dateControl(advertService.getAdvertById(request.getAdvertId()).getDateTime(),request.getUserId());
+        dateControl(advertService.getAdvertById(request.getAdvertId()).getDateTime(),request.getId());
 
         matchRepository.save(match);
 
@@ -41,8 +41,8 @@ public class MatchService {
                         match.getMatchId(),
                         new UserResponse
                                 (
-                                        match.getUser().getUserId(),
-                                        match.getUser().getUserName(),
+                                        match.getUser().getId(),
+                                        match.getUser().getName(),
                                         match.getUser().getEmail(),
                                         match.getUser().getTelephoneNumber()
                                 ),
@@ -65,8 +65,8 @@ public class MatchService {
                 );
     }
 
-    private void dateControl(LocalDateTime dateTime,Long userId) {
-        List<Match> matches = matchRepository.findByUser_UserId(userId);
+    private void dateControl(LocalDateTime dateTime,Long id) {
+        List<Match> matches = matchRepository.findByUser_Id(id);
 
         List<Match> matches1 = matches.stream().filter(match -> match.getAdvert().getDateTime() == dateTime).collect(Collectors.toList());
         if (matches1.size()!=0){

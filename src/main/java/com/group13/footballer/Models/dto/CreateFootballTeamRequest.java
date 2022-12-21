@@ -15,5 +15,5 @@ public class CreateFootballTeamRequest {
 
     private int footballTeamCurrentCount;
 
-    private Long userId;
+    private Long id;
 }

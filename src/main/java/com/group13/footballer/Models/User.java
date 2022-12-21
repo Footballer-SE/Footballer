@@ -18,9 +18,9 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
   
-    private String userName;
+    private String name;
    
     private String email;
 
@@ -40,9 +40,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
     private FootballTeam footballTeam;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
-    private List<Match> match;
-
+   
 
 
     

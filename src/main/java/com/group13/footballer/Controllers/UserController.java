@@ -24,27 +24,46 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     public GetCurrentUserResponse getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
 
-        User user=userRepository.findById(userPrincipal.getId())
-        .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
-        return new GetCurrentUserResponse
-        (
-           user.getId(),
-           user.getName(),
-           user.getEmail(),
-           user.getImageUrl(),
-           user.getEmailVerified(),
-           user.getPassword(),
-           user.getProvider(),
-           user.getProviderId(),
-           user.getTelephoneNumber(),
-           new UserMeFootballTeamResponse
-           (
-            user.getFootballTeam().getFootballTeamId(),
-            user.getFootballTeam().getFootballTeamName(),
-            user.getFootballTeam().getFootballTeamCapacity(),
-            user.getFootballTeam().getFootballTeamCurrentCount()
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+        if (user.getFootballTeam() == null) {
+            return new GetCurrentUserResponse
+                    (
+                            user.getId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getImageUrl(),
+                            user.getEmailVerified(),
+                            user.getPassword(),
+                            user.getProvider(),
+                            user.getProviderId(),
+                            user.getTelephoneNumber(),
+                            null
+                    );
+        } else {
+            return new GetCurrentUserResponse
+                    (
+                            user.getId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getImageUrl(),
+                            user.getEmailVerified(),
+                            user.getPassword(),
+                            user.getProvider(),
+                            user.getProviderId(),
+                            user.getTelephoneNumber(),
+                            new UserMeFootballTeamResponse
+                                    (
+                                            user.getFootballTeam().getFootballTeamId(),
+                                            user.getFootballTeam().getFootballTeamName(),
+                                            user.getFootballTeam().getFootballTeamCapacity(),
+                                            user.getFootballTeam().getFootballTeamCurrentCount()
 
-           )
-        );
+                                    )
+                    );
+
+        }
+
+
     }
 }

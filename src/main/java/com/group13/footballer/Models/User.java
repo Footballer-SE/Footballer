@@ -2,6 +2,7 @@ package com.group13.footballer.Models;
 
 import javax.persistence.*;
 
+import com.group13.footballer.core.security.AuthProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

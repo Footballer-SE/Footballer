@@ -1,6 +1,6 @@
 package com.group13.footballer.Services;
 
-import com.group13.footballer.Exceptions.FootballerNotFound;
+import com.group13.footballer.core.Exceptions.FootballerNotFound;
 import com.group13.footballer.Models.Advert;
 import com.group13.footballer.Repositories.AdvertRepository;
 import org.springframework.http.HttpStatus;

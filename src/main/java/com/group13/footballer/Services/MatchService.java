@@ -1,6 +1,6 @@
 package com.group13.footballer.Services;
 
-import com.group13.footballer.Exceptions.MatchNotFound;
+import com.group13.footballer.core.Exceptions.MatchNotFound;
 import com.group13.footballer.Models.Match;
 import com.group13.footballer.Repositories.MatchRepository;
 import org.springframework.http.HttpStatus;

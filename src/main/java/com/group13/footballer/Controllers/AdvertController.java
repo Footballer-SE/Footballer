@@ -2,6 +2,7 @@ package com.group13.footballer.Controllers;
 
 
 import com.group13.footballer.Models.Advert;
+import com.group13.footballer.Models.AdvertType;
 import com.group13.footballer.Models.dto.AdvertResponse;
 import com.group13.footballer.Models.dto.CreateAdvertRequest;
 import com.group13.footballer.Services.AdvertService;
@@ -24,6 +25,22 @@ public class AdvertController {
     @PostMapping("/addAdvert")
     public ResponseEntity<AdvertResponse> addAdvert(@RequestBody CreateAdvertRequest request) {
         return new ResponseEntity<>(advertService.addAdvert(request),HttpStatus.CREATED);
+    }
+    @GetMapping("/allPlayerAds")
+    public ResponseEntity<List<AdvertResponse>> getAllPlayerAds(){
+        return new ResponseEntity<>(advertService.getAllPlayerAdverts(),HttpStatus.OK);
+    }
+    @GetMapping("/allTeamAds")
+    public ResponseEntity<List<AdvertResponse>> getAllTeamAds(){
+        return new ResponseEntity<>(advertService.getAllTeamAdverts(),HttpStatus.OK);
+    }
+    @GetMapping("/allOpponentAds")
+    public ResponseEntity<List<AdvertResponse>> getAllOpponentAds(){
+        return new ResponseEntity<>(advertService.getAllOpponentAdverts(),HttpStatus.OK);
+    }
+    @GetMapping("/allAds/{type}")
+    public ResponseEntity<List<AdvertResponse>> getAllAds(@PathVariable String type){
+        return new ResponseEntity<>(advertService.getAllAdvertsbyType(type),HttpStatus.OK);
     }
 
     @GetMapping("/allAdverts")

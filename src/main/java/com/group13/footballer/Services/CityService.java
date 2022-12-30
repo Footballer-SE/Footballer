@@ -30,9 +30,14 @@ public class CityService {
                         city.getCityName()
                 )).collect(Collectors.toList());
     }
-
-
     protected City findCityById(Long Id){
         return cityRepository.findById(Id).orElseThrow(() -> new CityNotFoundException(Constant.CITY_NOT_FOUND));
+    }
+    public List<CityResponse> findAllCitiesbyType(){
+        return cityRepository.findAll().stream().map(city -> new CityResponse
+                (
+                        city.getCityId(),
+                        city.getCityName()
+                )).collect(Collectors.toList());
     }
 }

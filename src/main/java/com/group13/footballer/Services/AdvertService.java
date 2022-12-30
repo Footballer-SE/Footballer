@@ -12,6 +12,10 @@ import com.group13.footballer.Models.Advert;
 import com.group13.footballer.Repositories.AdvertRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -122,5 +126,79 @@ public class AdvertService {
 
     public void deleteAdvertById(Long id) {
         advertRepository.deleteById(findById(id).getAdvertId());
+    }
+
+
+    public  List<AdvertResponse> getAllPlayerAdverts() {
+        List<Advert> adverts = advertRepository.findAllByAdvertType(advertTypeConverter.convert("PLAYER"));
+        return adverts.stream().map(advert -> new AdvertResponse
+                (
+                        advert.getAdvertId(),
+                        advert.getDateTime(),
+                        advert.getDescription(),
+                        advert.getIsActive(),
+                        new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        advert.getAdvertType(),
+                        advert.getPositions().stream().map(position -> new PositionResponse
+                                (
+                                        position.getPositionId(),
+                                        position.getPositionName()
+                                )).collect(Collectors.toList())
+
+                )).collect(Collectors.toList());
+    }
+    public  List<AdvertResponse> getAllTeamAdverts() {
+        List<Advert> adverts = advertRepository.findAllByAdvertType(advertTypeConverter.convert("TEAM"));
+        return adverts.stream().map(advert -> new AdvertResponse
+                (
+                        advert.getAdvertId(),
+                        advert.getDateTime(),
+                        advert.getDescription(),
+                        advert.getIsActive(),
+                        new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        advert.getAdvertType(),
+                        advert.getPositions().stream().map(position -> new PositionResponse
+                                (
+                                        position.getPositionId(),
+                                        position.getPositionName()
+                                )).collect(Collectors.toList())
+
+                )).collect(Collectors.toList());
+    }
+    public  List<AdvertResponse> getAllOpponentAdverts() {
+        List<Advert> adverts = advertRepository.findAllByAdvertType(advertTypeConverter.convert("OPPONENT"));
+        return adverts.stream().map(advert -> new AdvertResponse
+                (
+                        advert.getAdvertId(),
+                        advert.getDateTime(),
+                        advert.getDescription(),
+                        advert.getIsActive(),
+                        new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        advert.getAdvertType(),
+                        advert.getPositions().stream().map(position -> new PositionResponse
+                                (
+                                        position.getPositionId(),
+                                        position.getPositionName()
+                                )).collect(Collectors.toList())
+
+                )).collect(Collectors.toList());
+    }
+    public  List<AdvertResponse> getAllAdvertsbyType(String type) {
+        List<Advert> adverts = advertRepository.findAllByAdvertType(advertTypeConverter.convert(type));
+        return adverts.stream().map(advert -> new AdvertResponse
+                (
+                        advert.getAdvertId(),
+                        advert.getDateTime(),
+                        advert.getDescription(),
+                        advert.getIsActive(),
+                        new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        advert.getAdvertType(),
+                        advert.getPositions().stream().map(position -> new PositionResponse
+                                (
+                                        position.getPositionId(),
+                                        position.getPositionName()
+                                )).collect(Collectors.toList())
+
+                )).collect(Collectors.toList());
     }
 }

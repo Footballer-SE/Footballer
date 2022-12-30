@@ -1,12 +1,14 @@
 package com.group13.footballer.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,30 +17,43 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Advert implements Serializable {
+public class Advert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long advertId;
-  
-    private Date dateTime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd@HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dateTime;
 
     private String description;
 
     private Boolean isActive;
-    @Column(columnDefinition = "text[]")
-    @Type(type = "com.group13.footballer.Config.GenericArrayUserType")
-    private Position[] emptyPositions;
+
+    @Enumerated(EnumType.STRING)
+    private AdvertType advertType;
  
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private City city;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "advert")
-    private List<Match> matches;
+    @ManyToMany
+    @JoinTable(
+    joinColumns = @JoinColumn,
+    inverseJoinColumns = @JoinColumn
+    )
+    private List<Position> positions;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn
-    private User user;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "advert")
+    private List<Match> match;
 
+    public Advert(LocalDateTime dateTime, String description, Boolean isActive, City city,AdvertType advertType, List<Position> positions) {
+        this.dateTime = dateTime;
+        this.description = description;
+        this.isActive = isActive;
+        this.city = city;
+        this.positions = positions;
+        this.advertType=advertType;
+    }
 }

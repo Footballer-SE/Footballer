@@ -6,7 +6,6 @@ import com.group13.footballer.core.security.AuthProvider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.List;
 
@@ -19,16 +18,16 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
   
-    private String userName;
+    private String name;
    
     private String email;
 
     private String imageUrl;
     
     private Boolean emailVerified = false;
-    @JsonIgnore
+
     private String password;
   
     @Enumerated(EnumType.STRING)
@@ -38,11 +37,13 @@ public class User {
 
     private String telephoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
-    private List<Advert> adverts;
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "user")
+    private FootballTeam footballTeam;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
-    private List<FootballTeam> footballTeams;
+   
+
+
+    
 
    
 }

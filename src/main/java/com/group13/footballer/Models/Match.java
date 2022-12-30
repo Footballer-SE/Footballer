@@ -16,23 +16,16 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchId;
 
-    @Column(name = "request_made_by")
-    private String requestMadeBy;
-
-    @Column(name = "_request")
-    private String request;
-
-    @Column(name = "_response")
-    private String response;
-
-    @Column(name ="is_succeed")
-    private Boolean isSucceed;
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
-    private FootballTeam footballTeam;
+    private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
     private Advert advert;
+
+    public Match(User user, Advert advert) {
+        this.user = user;
+        this.advert = advert;
+    }
 }

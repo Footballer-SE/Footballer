@@ -1,10 +1,13 @@
 package com.group13.footballer.Config;
 
-import com.group13.footballer.Security.*;
-import com.group13.footballer.Security.oauth2.CustomOAuth2UserService;
-import com.group13.footballer.Security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.group13.footballer.Security.oauth2.OAuth2AuthenticationFailureHandler;
-import com.group13.footballer.Security.oauth2.OAuth2AuthenticationSuccessHandler;
+
+import com.group13.footballer.core.security.CustomUserDetailsService;
+import com.group13.footballer.core.security.RestAuthenticationEntryPoint;
+import com.group13.footballer.core.security.TokenAuthenticationFilter;
+import com.group13.footballer.core.security.oauth2.CustomOAuth2UserService;
+import com.group13.footballer.core.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.group13.footballer.core.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.group13.footballer.core.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +22,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -110,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                         .permitAll()
-                    .antMatchers("/auth/**", "/oauth2/**","/allFootballers/**")
+                    .antMatchers("/auth/**", "/oauth2/**","/allFootballers/**","/advert/allAdverts/**")
                         .permitAll()
                     .anyRequest()
                         .authenticated()

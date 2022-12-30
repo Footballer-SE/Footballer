@@ -23,10 +23,10 @@ public class City {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long citytId;
+    private Long cityId;
 
     private String cityName;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "city")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "city")
     private List<Advert> adverts;
 }

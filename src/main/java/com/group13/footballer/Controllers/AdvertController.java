@@ -2,14 +2,17 @@ package com.group13.footballer.Controllers;
 
 
 import com.group13.footballer.Models.Advert;
+import com.group13.footballer.Models.dto.AdvertResponse;
+import com.group13.footballer.Models.dto.CreateAdvertRequest;
 import com.group13.footballer.Services.AdvertService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/advert")
 public class AdvertController {
 
     private final AdvertService advertService;
@@ -19,27 +22,25 @@ public class AdvertController {
     }
 
     @PostMapping("/addAdvert")
-    public ResponseEntity<Advert> addAdvert(@RequestBody Advert advert) {
-        return advertService.addAdvert(advert);
+    public ResponseEntity<AdvertResponse> addAdvert(@RequestBody CreateAdvertRequest request) {
+        return new ResponseEntity<>(advertService.addAdvert(request),HttpStatus.CREATED);
     }
 
     @GetMapping("/allAdverts")
-    public ResponseEntity<List<Advert>> getAllAdverts(){
-        return advertService.getAllAdverts();
+    public ResponseEntity<List<AdvertResponse>> getAllAdverts(){
+        return new ResponseEntity<>(advertService.getAllAdverts(),HttpStatus.OK);
     }
 
     @GetMapping("/getAdvert/{id}")
-    public ResponseEntity<Advert> getAdvertById(@PathVariable Long id){
-        return advertService.getAdvertById(id);
+    public ResponseEntity<AdvertResponse> getAdvertById(@PathVariable Long id){
+        return new ResponseEntity<>(advertService.getAdvertById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/updateAdvert/{id}")
-    public ResponseEntity<Advert> updateAdvertById(@RequestBody Advert advert, @PathVariable Long id) {
-        return advertService.updateAdvertById(advert,id);
-    }
+
     @DeleteMapping("/deleteAdvert/{id}")
-    public ResponseEntity deleteAdvertById(@PathVariable Long id) {
-        return advertService.deleteAdvertById(id);
+    public ResponseEntity<Void> deleteAdvertById(@PathVariable Long id) {
+        advertService.deleteAdvertById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 }

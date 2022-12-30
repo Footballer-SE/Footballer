@@ -1,14 +1,14 @@
 package com.group13.footballer.Controllers;
 
-import com.group13.footballer.Exceptions.BadRequestException;
-import com.group13.footballer.Models.AuthProvider;
+import com.group13.footballer.core.Exceptions.BadRequestException;
+import com.group13.footballer.core.security.AuthProvider;
 import com.group13.footballer.Models.User;
-import com.group13.footballer.Payload.ApiResponse;
-import com.group13.footballer.Payload.AuthResponse;
-import com.group13.footballer.Payload.LoginRequest;
-import com.group13.footballer.Payload.SignUpRequest;
+import com.group13.footballer.Models.dto.ApiResponse;
+import com.group13.footballer.Models.dto.AuthResponse;
+import com.group13.footballer.Models.dto.LoginRequest;
+import com.group13.footballer.Models.dto.SignUpRequest;
 import com.group13.footballer.Repositories.UserRepository;
-import com.group13.footballer.Security.TokenProvider;
+import com.group13.footballer.core.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -62,7 +62,7 @@ public class AuthController {
 
         // Creating user's account
         User user = new User();
-        user.setUserName(signUpRequest.getName());
+        user.setName(signUpRequest.getName());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(signUpRequest.getPassword());
         user.setProvider(AuthProvider.local);
@@ -73,7 +73,7 @@ public class AuthController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/user/me")
-                .buildAndExpand(result.getUserId()).toUri();
+                .buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully@"));

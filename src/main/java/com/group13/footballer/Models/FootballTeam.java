@@ -15,7 +15,7 @@ public class FootballTeam {
    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long footballTeamId;
+    private Long id;
  
     private String footballTeamName;
 

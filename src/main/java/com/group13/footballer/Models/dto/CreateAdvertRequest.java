@@ -28,6 +28,8 @@ public class CreateAdvertRequest {
 
     private Long cityId;
 
+    private Long id;
+
     private String advertType;
 
     private List<Long> positionIds;

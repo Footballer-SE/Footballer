@@ -30,7 +30,7 @@ public class UserService {
                         user.getTelephoneNumber(),
                         new UserMeFootballTeamResponse
                                 (
-                                        user.getFootballTeam().getFootballTeamId(),
+                                        user.getFootballTeam().getId(),
                                         user.getFootballTeam().getFootballTeamName(),
                                         user.getFootballTeam().getFootballTeamCapacity(),
                                         user.getFootballTeam().getFootballTeamCurrentCount()

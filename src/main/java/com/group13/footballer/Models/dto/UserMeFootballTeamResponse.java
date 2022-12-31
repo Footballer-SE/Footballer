@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserMeFootballTeamResponse {
 
-    private Long footballTeamId;
+    private Long id;
 
     private String footballTeamName;
 

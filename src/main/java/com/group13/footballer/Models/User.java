@@ -40,7 +40,8 @@ public class User {
     @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "user")
     private FootballTeam footballTeam;
 
-   
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "user")
+    private List<Advert> adverts;
 
 
     

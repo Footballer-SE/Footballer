@@ -38,6 +38,10 @@ public class Advert {
     @JoinColumn
     private City city;
 
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
+
     @ManyToMany
     @JoinTable(
     joinColumns = @JoinColumn,
@@ -45,14 +49,17 @@ public class Advert {
     )
     private List<Position> positions;
 
+
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "advert")
     private List<Match> match;
 
-    public Advert(LocalDateTime dateTime, String description, Boolean isActive, City city,AdvertType advertType, List<Position> positions) {
+    public Advert(LocalDateTime dateTime, String description, Boolean isActive, City city,AdvertType advertType, User user,List<Position> positions) {
         this.dateTime = dateTime;
         this.description = description;
         this.isActive = isActive;
         this.city = city;
+        this.user = user;
         this.positions = positions;
         this.advertType=advertType;
     }

@@ -19,4 +19,9 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(DateIsWrongException.class)
+    public ResponseEntity<?> dateIsWrong(DateIsWrongException exception)  {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.EXPECTATION_FAILED);
+    }
+
 }

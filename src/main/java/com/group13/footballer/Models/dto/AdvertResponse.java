@@ -2,17 +2,14 @@ package com.group13.footballer.Models.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.group13.footballer.Models.AdvertType;
-import com.group13.footballer.Models.City;
-import com.group13.footballer.Models.Match;
-import com.group13.footballer.Models.Position;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import java.util.List;
 
 @Data
@@ -31,6 +28,8 @@ public class AdvertResponse {
     private Boolean isActive;
 
     private CityResponse city;
+
+    private UserResponse user;
 
     private AdvertType advertType;
 

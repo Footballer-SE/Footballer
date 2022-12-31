@@ -45,7 +45,7 @@ public class TeamService {
     }
 
     public FootballTeamResponse updateTeam(UpdateFootballTeamRequest request) {
-        FootballTeam updateTeam = findTeamById(request.getFootballTeamId());
+        FootballTeam updateTeam = findTeamById(request.getId());
 
         updateTeam.setFootballTeamCapacity(request.getFootballTeamCapacity());
         updateTeam.setFootballTeamCurrentCount(request.getFootballTeamCurrentCount());
@@ -53,7 +53,7 @@ public class TeamService {
         FootballTeam updatedFootballTeam = teamRepository.save(updateTeam);
         return new FootballTeamResponse
                 (
-                        updatedFootballTeam.getFootballTeamId(),
+                        updatedFootballTeam.getId(),
                         updatedFootballTeam.getFootballTeamName(),
                         updatedFootballTeam.getFootballTeamCapacity(),
                         updatedFootballTeam.getFootballTeamCurrentCount(),
@@ -68,7 +68,7 @@ public class TeamService {
     }
 
     public void deleteTeamById(Long id) {
-        teamRepository.deleteById(findTeamById(id).getFootballTeamId());
+        teamRepository.deleteById(findTeamById(id).getId());
     }
 
     public FootballTeam findTeamById(Long id) {

@@ -3,6 +3,7 @@ package com.group13.footballer.Services;
 
 import com.group13.footballer.Models.City;
 import com.group13.footballer.Models.Position;
+import com.group13.footballer.Models.User;
 import com.group13.footballer.Models.converter.AdvertTypeConverter;
 import com.group13.footballer.Models.dto.*;
 import com.group13.footballer.core.Exceptions.Constant.Constant;
@@ -35,9 +36,12 @@ public class AdvertService {
 
     private final AdvertTypeConverter advertTypeConverter;
 
+    private final UserService userService;
+
     public AdvertResponse addAdvert(CreateAdvertRequest request) {
         City city = cityService.findCityById(request.getCityId());
         List<Position> byPositions = positionService.findByPositions(request.getPositionIds());
+        User user = userService.findById(request.getId());
         controlDate(request.getDateTime());
 
         Advert advert = new Advert
@@ -47,6 +51,7 @@ public class AdvertService {
                         request.getIsActive(),
                         city,
                         advertTypeConverter.convert(request.getAdvertType()),
+                        user,
                         byPositions
 
                 );
@@ -58,6 +63,7 @@ public class AdvertService {
                 advert.getDescription(),
                 advert.getIsActive(),
                 new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                new UserResponse(advert.getUser().getId(),advert.getUser().getName(),advert.getUser().getEmail(),advert.getUser().getTelephoneNumber()),
                 advert.getAdvertType(),
                 byPositions.stream().map(position -> new PositionResponse
                         (
@@ -83,6 +89,7 @@ public class AdvertService {
                         advert.getDescription(),
                         advert.getIsActive(),
                         new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        new UserResponse(advert.getUser().getId(),advert.getUser().getName(),advert.getUser().getEmail(),advert.getUser().getTelephoneNumber()),
                         advert.getAdvertType(),
                         advert.getPositions().stream().map(position -> new PositionResponse
                                 (
@@ -102,6 +109,7 @@ public class AdvertService {
                         advert.getDescription(),
                         advert.getIsActive(),
                         new CityResponse(advert.getCity().getCityId(), advert.getCity().getCityName()),
+                        new UserResponse(advert.getUser().getId(),advert.getUser().getName(),advert.getUser().getEmail(),advert.getUser().getTelephoneNumber()),
                         advert.getAdvertType(),
                         advert
                                 .getPositions()

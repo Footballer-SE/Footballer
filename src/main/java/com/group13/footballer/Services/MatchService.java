@@ -7,14 +7,13 @@ import com.group13.footballer.core.Exceptions.MatchNotFound;
 import com.group13.footballer.Models.Match;
 import com.group13.footballer.Repositories.MatchRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +52,7 @@ public class MatchService {
                                         match.getAdvert().getDescription(),
                                         match.getAdvert().getIsActive(),
                                         new CityResponse(match.getAdvert().getCity().getCityId(), match.getAdvert().getCity().getCityName()),
+                                        new UserResponse(match.getAdvert().getUser().getId(),match.getAdvert().getUser().getName(),match.getAdvert().getUser().getEmail(),match.getAdvert().getUser().getTelephoneNumber()),
                                         match.getAdvert().getAdvertType(),
                                         match.getAdvert()
                                                 .getPositions()

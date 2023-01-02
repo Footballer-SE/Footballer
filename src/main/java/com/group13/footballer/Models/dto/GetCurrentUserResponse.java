@@ -34,4 +34,6 @@ public class GetCurrentUserResponse {
 
     private UserMeFootballTeamResponse footballTeam;
 
+
+
 }

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,6 +19,6 @@ public class AvatarImage {
 
     private String url;
 
-    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "avatarImage")
-    private FootballTeam footballTeam;
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "avatarImage")
+    private List<FootballTeam> footballTeam;
 }

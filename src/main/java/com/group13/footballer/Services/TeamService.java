@@ -44,8 +44,6 @@ public class TeamService {
                         createFootballTeamRequest.getFootballTeamCurrentCount(),
                         user,
                         avatarImage
-
-
                 );
         teamRepository.save(footballTeam);
 

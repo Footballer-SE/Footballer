@@ -33,7 +33,8 @@ public class UserService {
                                         user.getFootballTeam().getId(),
                                         user.getFootballTeam().getFootballTeamName(),
                                         user.getFootballTeam().getFootballTeamCapacity(),
-                                        user.getFootballTeam().getFootballTeamCurrentCount()
+                                        user.getFootballTeam().getFootballTeamCurrentCount(),
+                                        new AvatarImageResponse(user.getFootballTeam().getAvatarImage().getId(),user.getFootballTeam().getAvatarImage().getUrl())
                                 )
                 );
     }
@@ -86,7 +87,8 @@ public class UserService {
                                             user.getFootballTeam().getId(),
                                             user.getFootballTeam().getFootballTeamName(),
                                             user.getFootballTeam().getFootballTeamCapacity(),
-                                            user.getFootballTeam().getFootballTeamCurrentCount()
+                                            user.getFootballTeam().getFootballTeamCurrentCount(),
+                                            new AvatarImageResponse(user.getFootballTeam().getAvatarImage().getId(),user.getFootballTeam().getAvatarImage().getUrl())
 
                                     )
                     );

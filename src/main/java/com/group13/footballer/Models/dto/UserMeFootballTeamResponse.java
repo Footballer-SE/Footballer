@@ -17,4 +17,6 @@ public class UserMeFootballTeamResponse {
 
     private int footballTeamCurrentCount;
 
+    private AvatarImageResponse avatarImageResponse;
+
 }

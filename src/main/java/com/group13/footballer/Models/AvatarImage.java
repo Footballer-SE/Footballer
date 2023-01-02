@@ -1,9 +1,6 @@
 package com.group13.footballer.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +16,7 @@ public class AvatarImage {
     private Long id;
 
     private String url;
+
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY,mappedBy = "avatarImage")
+    private FootballTeam footballTeam;
 }

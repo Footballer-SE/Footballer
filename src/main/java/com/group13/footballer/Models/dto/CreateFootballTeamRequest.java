@@ -16,4 +16,6 @@ public class CreateFootballTeamRequest {
     private int footballTeamCapacity;
 
     private int footballTeamCurrentCount;
+
+    private Long AvatarImageId;
 }

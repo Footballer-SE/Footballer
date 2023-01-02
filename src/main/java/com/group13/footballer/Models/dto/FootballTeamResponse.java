@@ -18,4 +18,6 @@ public class FootballTeamResponse {
     private int footballTeamCurrentCount;
 
     private UserResponse user;
+
+    private AvatarImageResponse avatarImageResponse;
 }

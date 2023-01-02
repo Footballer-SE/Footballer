@@ -1,6 +1,6 @@
 package com.group13.footballer.Services;
 
-import com.group13.footballer.Models.Advert;
+import com.group13.footballer.Models.AvatarImage;
 import com.group13.footballer.Models.dto.*;
 import com.group13.footballer.core.Exceptions.Constant.Constant;
 import com.group13.footballer.core.Exceptions.TeamAlreadyExistException;
@@ -21,13 +21,17 @@ public class TeamService {
 
     private final UserService userService;
 
-    public TeamService(TeamRepository teamRepository, UserService userService) {
+    private final AvatarImageService avatarImageService;
+
+    public TeamService(TeamRepository teamRepository, UserService userService, AvatarImageService avatarImageService) {
         this.teamRepository = teamRepository;
         this.userService = userService;
+        this.avatarImageService = avatarImageService;
     }
 
     public void addTeam(CreateFootballTeamRequest createFootballTeamRequest) {
         User user = userService.findById(createFootballTeamRequest.getId());
+        AvatarImage avatarImage = avatarImageService.findImageById(createFootballTeamRequest.getAvatarImageId());
 //TODO matchı sıl
         if (teamRepository.findTeamByUser_Id(createFootballTeamRequest.getId()).isPresent()) {
             throw new TeamAlreadyExistException(Constant.TEAM_ALREADY_EXIST);
@@ -38,7 +42,10 @@ public class TeamService {
                         createFootballTeamRequest.getFootballTeamName(),
                         createFootballTeamRequest.getFootballTeamCapacity(),
                         createFootballTeamRequest.getFootballTeamCurrentCount(),
-                        user
+                        user,
+                        avatarImage
+
+
                 );
         teamRepository.save(footballTeam);
 
@@ -63,7 +70,9 @@ public class TeamService {
                                         updatedFootballTeam.getUser().getName(),
                                         updatedFootballTeam.getUser().getEmail(),
                                         updatedFootballTeam.getUser().getTelephoneNumber()
-                                )
+                                ),
+                        new AvatarImageResponse(updatedFootballTeam.getAvatarImage().getId(),updatedFootballTeam.getAvatarImage().getUrl())
+
                 );
     }
 
@@ -82,7 +91,8 @@ public class TeamService {
                         team.getFootballTeamName(),
                         team.getFootballTeamCapacity(),
                         team.getFootballTeamCurrentCount(),
-                        new UserResponse(team.getUser().getId(),team.getUser().getName(),team.getUser().getEmail(),team.getUser().getTelephoneNumber())
+                        new UserResponse(team.getUser().getId(),team.getUser().getName(),team.getUser().getEmail(),team.getUser().getTelephoneNumber()),
+                        new AvatarImageResponse(team.getAvatarImage().getId(),team.getAvatarImage().getUrl())
                 );
     }
     public List<FootballTeamResponse> getAllTeams() {
@@ -93,7 +103,8 @@ public class TeamService {
                         team.getFootballTeamName(),
                         team.getFootballTeamCapacity(),
                         team.getFootballTeamCurrentCount(),
-                        new UserResponse(team.getUser().getId(),team.getUser().getName(),team.getUser().getEmail(),team.getUser().getTelephoneNumber())
+                        new UserResponse(team.getUser().getId(),team.getUser().getName(),team.getUser().getEmail(),team.getUser().getTelephoneNumber()),
+                        new AvatarImageResponse(team.getAvatarImage().getId(),team.getAvatarImage().getUrl())
                 )).collect(Collectors.toList());
     }
 }

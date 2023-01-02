@@ -27,5 +27,9 @@ public class FootballTeam {
     @JoinColumn
     private User user;
 
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn
+    private AvatarImage avatarImage;
+
 
 }

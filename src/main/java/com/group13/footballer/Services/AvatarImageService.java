@@ -1,8 +1,11 @@
 package com.group13.footballer.Services;
 
 import com.group13.footballer.Models.AvatarImage;
+import com.group13.footballer.Models.City;
 import com.group13.footballer.Models.dto.AvatarImageResponse;
 import com.group13.footballer.Repositories.AvatarImageRepository;
+import com.group13.footballer.core.Exceptions.CityNotFoundException;
+import com.group13.footballer.core.Exceptions.Constant.Constant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,10 @@ public class AvatarImageService {
 
     protected List<AvatarImage> findByAvatar(List<Long> id){
         return avatarImageRepository.findByIdIn(id);
+    }
+
+    protected AvatarImage findImageById(Long Id){
+        return avatarImageRepository.findById(Id).orElseThrow(() -> new CityNotFoundException(Constant.CITY_NOT_FOUND));
     }
 
 

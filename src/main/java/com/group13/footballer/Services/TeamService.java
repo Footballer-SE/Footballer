@@ -55,6 +55,7 @@ public class TeamService {
         updateTeam.setFootballTeamCapacity(request.getFootballTeamCapacity());
         updateTeam.setFootballTeamCurrentCount(request.getFootballTeamCurrentCount());
         updateTeam.setFootballTeamName(request.getFootballTeamName());
+        updateTeam.setAvatarImage(request.getAvatarImage());
         FootballTeam updatedFootballTeam = teamRepository.save(updateTeam);
         return new FootballTeamResponse
                 (

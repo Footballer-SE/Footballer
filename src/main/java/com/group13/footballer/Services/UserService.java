@@ -1,7 +1,7 @@
 package com.group13.footballer.Services;
 
-import com.group13.footballer.Models.dto.GetUserResponse;
-import com.group13.footballer.Models.dto.UserMeFootballTeamResponse;
+import com.group13.footballer.Models.FootballTeam;
+import com.group13.footballer.Models.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +37,60 @@ public class UserService {
                                 )
                 );
     }
-    protected User findById(Long id){
+    public User findById(Long id){
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(Constant.USER_NOT_FOUND));
+    }
+    public UserResponse getUserById(Long id) {
+        User user = findById(id);
+        return new UserResponse
+                (
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getTelephoneNumber()
+
+                );
+    }
+    public GetCurrentUserResponse updateUser(UpdateUserRequest request) {
+        User updateUser = findById(request.getId());
+        updateUser.setTelephoneNumber(request.getTelephoneNumber());
+        User user = userRepository.save(updateUser);
+        if (user.getFootballTeam() == null) {
+            return new GetCurrentUserResponse
+                    (
+                            user.getId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getImageUrl(),
+                            user.getEmailVerified(),
+                            user.getPassword(),
+                            user.getProvider(),
+                            user.getProviderId(),
+                            user.getTelephoneNumber(),
+                            null
+                    );
+        } else {
+            return new GetCurrentUserResponse
+                    (
+                            user.getId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getImageUrl(),
+                            user.getEmailVerified(),
+                            user.getPassword(),
+                            user.getProvider(),
+                            user.getProviderId(),
+                            user.getTelephoneNumber(),
+                            new UserMeFootballTeamResponse
+                                    (
+                                            user.getFootballTeam().getId(),
+                                            user.getFootballTeam().getFootballTeamName(),
+                                            user.getFootballTeam().getFootballTeamCapacity(),
+                                            user.getFootballTeam().getFootballTeamCurrentCount()
+
+                                    )
+                    );
+        }
     }
 
 }

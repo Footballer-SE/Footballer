@@ -1,17 +1,17 @@
 package com.group13.footballer.Controllers;
 
+import com.group13.footballer.Models.dto.*;
+import com.group13.footballer.Services.UserService;
 import com.group13.footballer.core.Exceptions.ResourceNotFoundException;
 import com.group13.footballer.Models.User;
-import com.group13.footballer.Models.dto.GetCurrentUserResponse;
-import com.group13.footballer.Models.dto.UserMeFootballTeamResponse;
-import com.group13.footballer.Models.dto.UserResponse;
 import com.group13.footballer.Repositories.UserRepository;
 import com.group13.footballer.core.security.CurrentUser;
 import com.group13.footballer.core.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -19,6 +19,12 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private final UserService uS;
+
+    public UserController(UserService uS) {
+        this.uS = uS;
+    }
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
@@ -65,5 +71,13 @@ public class UserController {
         }
 
 
+    }
+    @PutMapping("/updateUser")
+    public ResponseEntity<GetCurrentUserResponse> updateUser(@RequestBody UpdateUserRequest request){
+        return new ResponseEntity<>(uS.updateUser(request), HttpStatus.OK);
+    }
+    @GetMapping("/user/{id}")
+    public ResponseEntity<UserResponse> findbyId(@PathVariable Long id){
+        return new ResponseEntity<>(uS.getUserById(id), HttpStatus.OK);
     }
 }

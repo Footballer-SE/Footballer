@@ -28,12 +28,4 @@ public class FootballTeam {
     private User user;
 
 
-
-    public FootballTeam(String footballTeamName,int footballTeamCapacity,int footballTeamCurrentCount,User user){
-        this.footballTeamName = footballTeamName;
-        this.footballTeamCapacity = footballTeamCapacity;
-        this.footballTeamCurrentCount = footballTeamCurrentCount;
-        this.user = user;
-    }
-
 }
